@@ -1,0 +1,6 @@
+[submodule "MacroLibX"]
+	path = MacroLibX
+	url = https://github.com/420verfl0w/MacroLibX.git
+[submodule "libft"]
+	path = libft
+	url = https://github.com/barAuChocolat/libft.git
