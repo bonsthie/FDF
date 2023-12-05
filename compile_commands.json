@@ -1,0 +1,24 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/clang",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "include",
+      "-I",
+      "libft",
+      "-I",
+      "MacroLibX",
+      "-c",
+      "-g",
+      "-o",
+      "obj/main.o",
+      "src/main.c"
+    ],
+    "directory": "/home/bonsthie/Documents/code/42/FDF",
+    "file": "/home/bonsthie/Documents/code/42/FDF/src/main.c",
+    "output": "/home/bonsthie/Documents/code/42/FDF/obj/main.o"
+  }
+]
