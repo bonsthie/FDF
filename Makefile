@@ -58,4 +58,6 @@ fclean: clean lclean
 	@rm -f $(NAME)
 	@$(foreach lib,$(LIBRARIES),$(MAKE) -C $($(lib)_DIR) fclean;)
 
+re : fclean all
+
 .PHONY: all clean fclean lclean re libraries
