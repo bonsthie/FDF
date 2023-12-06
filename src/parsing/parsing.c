@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonnet <bbonnet@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 00:52:47 by bbonnet           #+#    #+#             */
-/*   Updated: 2023/12/06 02:04:18 by bbonnet          ###   ########.fr       */
+/*   Updated: 2023/12/06 17:00:40 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "get_next_line.h"
 #include "parsing.h"
 
-t_vect3 *create_map(char *file)
+t_vertex *parsing_map(char *file)
 {
     int     fd;
-    t_vect3 *map;
+    t_vertex *map;
     int     size;
 
     fd = open(file, O_RDONLY);
@@ -30,7 +30,7 @@ t_vect3 *create_map(char *file)
     fd = open(file, O_RDONLY);
     if (fd < 0)
         return (NULL);
-    map = parsing_map(fd);
+    map = create_map(fd, size);
     close(fd);
     return (map);
 }

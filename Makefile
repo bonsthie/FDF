@@ -23,7 +23,7 @@ LIBFT_DIR = libft
 LIBFT_INCLUDE = .
 
 LIBMLX_DIR = MacroLibX
-LIBMLX_FLAG = -lmlx -lSDL2 -Wl,-rpath,$(LIBMLX_DIR)
+LIBMLX_FLAG = -lm -lmlx -lSDL2 -Wl,-rpath,$(LIBMLX_DIR)
 LIBMLX_INCLUDE = includes
 
 LIB = $(foreach lib,$(LIBRARIES),-L $($(lib)_DIR) $($(lib)_FLAG))
