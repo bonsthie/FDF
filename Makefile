@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRC_DIR = src
 OBJ_DIR = obj
 HSRCS = include
-SRCS = $(wildcard $(SRC_DIR)/*.c)
+SRCS = $(shell find $(SRC_DIR) -name '*.c')
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 
@@ -37,7 +37,7 @@ $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIB) $(DEBUG)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(@D)
 	@echo -e "$(YELLOW)Compiling $(notdir $<)...$(NC)"
 	@$(CC) $(CFLAGS) -I $(HSRCS) $(LIB_DIR) -o $@ -c $< $(DEBUG)
 
