@@ -33,28 +33,28 @@ all: libraries $(NAME)
 
 
 $(NAME): $(OBJS)
-	@echo -e "$(GREEN)Linking $(NAME)...$(NC)"
+	@echo "$(GREEN)Linking $(NAME)...$(NC)"
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIB) $(DEBUG)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	@echo -e "$(YELLOW)Compiling $(notdir $<)...$(NC)"
+	@echo "$(YELLOW)Compiling $(notdir $<)...$(NC)"
 	@$(CC) $(CFLAGS) -I $(HSRCS) $(LIB_DIR) -o $@ -c $< $(DEBUG)
 
 libraries:
-	@echo -e "$(YELLOW)Building libraries...$(NC)"
+	@echo "$(YELLOW)Building libraries...$(NC)"
 	$(foreach lib,$(LIBRARIES), $(MAKE) -C $($(lib)_DIR);)
 
 clean:
-	@echo -e "$(RED)Cleaning object files...$(NC)"
+	@echo "$(RED)Cleaning object files...$(NC)"
 	@rm -rf $(OBJ_DIR)
 
 lclean:
-	@echo -e "$(RED)Cleaning libraries...$(NC)"
+	@echo "$(RED)Cleaning libraries...$(NC)"
 	@$(foreach lib,$(LIBRARIES),$(MAKE) -C $($(lib)_DIR) clean;)
 
 fclean: clean lclean
-	@echo -e "$(RED)Cleaning executable $(NAME)...$(NC)"
+	@echo "$(RED)Cleaning executable $(NAME)...$(NC)"
 	@rm -f $(NAME)
 	@$(foreach lib,$(LIBRARIES),$(MAKE) -C $($(lib)_DIR) fclean;)
 

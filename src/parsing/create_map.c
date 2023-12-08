@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 02:04:29 by bbonnet           #+#    #+#             */
-/*   Updated: 2023/12/06 16:52:18 by babonnet         ###   ########.fr       */
+/*   Updated: 2023/12/07 16:23:48 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int fill_line(int fd, t_vertex *map)
 	count = 0;
 	line = get_next_line(fd);
 	if (!line)
-		return (2147483647);
+		return (-2147483648);
 	while (line[i])
 	{
 		while (line[i] == ' ' && line[i])
@@ -44,6 +44,7 @@ t_vertex *create_map(int fd, int size)
 {
     t_vertex *map;
     int     i;
+	int tmp;
 
     map = malloc((size + 1) * sizeof(t_vertex));
     if (!map)
@@ -51,7 +52,10 @@ t_vertex *create_map(int fd, int size)
     i = 0;
     while(i <= size)
     {
-        i += fill_line(fd, &map[i]);
+        tmp = fill_line(fd, &map[i]);
+		if (tmp == -2147483648)
+			break;
+		i += tmp;
     }
 	map[size].end = true;
 	map[size].y = 0;
