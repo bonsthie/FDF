@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_verification.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonnet <bbonnet@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 02:01:24 by bbonnet           #+#    #+#             */
-/*   Updated: 2023/12/06 02:01:39 by bbonnet          ###   ########.fr       */
+/*   Updated: 2023/12/09 16:22:04 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "fdf.h"
 
 int line_size(char *line)
 {
@@ -30,30 +31,29 @@ int line_size(char *line)
     return (count);
 }
 
-int is_valid_map(int fd)
+int is_valid_map(int fd, t_map *map)
 {
-    int     size;
     int     line_len;
     char    *line;
-    int     count;
 
     line = get_next_line(fd);
-    size = 0;
-    count = 0;
+    map->width = 0;
+    map->height = 0;
     while(line)
     {
         line_len = line_size(line);
-        if (size == 0)
-            size = line_len;
-        else if (size != line_len)
+        if (map->width == 0)
+            map->width = line_len;
+        else if (map->width != line_len)
             break;
-        count++;
+        map->height++;
         free(line);
         line = get_next_line(fd);
     }
     free(line);
     close(fd);
-    if (size == line_len)
-        return (count * size);
+	map->height = map->height;
+    if (map->width == line_len)
+        return (map->height * map->width);
     return (0);
 }

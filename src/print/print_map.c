@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:48:42 by babonnet          #+#    #+#             */
-/*   Updated: 2023/12/08 08:44:07 by babonnet         ###   ########.fr       */
+/*   Updated: 2023/12/09 19:32:13 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,51 @@
 
 
 #include <stdio.h>
+#define WIDTH 720
+#define HEIGHT WIDTH * 9 /16
 
 float *orientation(void)
 {
     static float matrix[16] = {0.0};
 	float radian;
 	float	zoom;
+	float	angle = 0;
 
-	zoom = 150.0;
+	zoom = 0.08;
 
     if (matrix[0] == 0)
     {   
-        radian = 20 * 3.1416 / 180.0;
+        radian = 10 * 3.1416 / 180.0;
 
         matrix[0]  = zoom;
-        matrix[5]  = zoom;
-        matrix[10] = zoom;
-        matrix[15] = 1.0;
-		matrix[3] = 1.0;
-		matrix[7] = 1.0;
-		matrix[11] = 1.0;
+        matrix[10]  = zoom;
+		matrix[7] = -sin(angle);
+		matrix[5] =zoom;
+		matrix[15] = 3.0;
     }
 	(void)radian;
+    return (matrix);
+}
+
+float *fov(void)
+{
+    static float matrix[16] = {0.0};
+	float fov = 1.0 / tan(45.0 * 3.14159265358979323846 / 180.0 / 2.0);
+	float aspect_ratio = (float)WIDTH / (float)HEIGHT;
+	float near = 1.3;
+	float far = 1000.0;
+
+
+    if (matrix[0] == 0)
+    {
+		matrix[0] = fov * aspect_ratio;
+		matrix[5] = fov;
+		matrix[10] = (far+near)/(far-near);
+		matrix[11] = 1.0;
+		matrix[14] = (2.0 *near*far)/(near-far);
+		matrix[15] = 0.2;
+
+    }
     return (matrix);
 }
 
@@ -63,56 +86,48 @@ float *matrix_multiplication1x4(float *v, float *transformation) //opti
 }
 
 
-void print_vect(void *mlx_co, void *mlx_window, float *v1, float *v2, float *v3)
+void create_point2D(float *vect3, int *co)
 {
-	float *v1_m = matrix_multiplication1x4(v1, orientation());
-	float *v2_m = matrix_multiplication1x4(v2, orientation());
-	float *v3_m = matrix_multiplication1x4(v3, orientation());
+	float *m_orientation = matrix_multiplication1x4(vect3, orientation());
+	float *m_fov = matrix_multiplication1x4(m_orientation, fov());
 
-	t_vect2 p1;
-	t_vect2 p2;
-	t_vect2 p3;
-
-	p1.x = v1_m[0] / v1_m[2];
-	p1.z = v1_m[1] / v1_m[2];
-
-	p2.x = v2_m[0] / v2_m[2];
-	p2.z = v2_m[1] / v2_m[2];
-
-	p3.x = v3_m[0] / v3_m[2];
-	p3.z = v3_m[1] / v3_m[2];
-
-	printf("p1.x == %d p1.z == %d\np2.x == %d p2.z == %d\np3.x == %d p3.z == %d\n\n", p1.x, p1.z, p2.x, p2.z, p3.x, p3.z);
-	plotLine(mlx_co, mlx_window, p1, p2, 0xE04062);
-	plotLine(mlx_co, mlx_window, p1, p3, 0xFFFFFF);
-
+	co[0] = ((m_fov[0]/ m_fov[3]) + 1) * (WIDTH / 2.0);
+	co[1] = ((m_fov[1] / m_fov[3])) * ((float)HEIGHT / 2.0);
 }
 
-void print_map(t_vertex *map, void *mlx_co, void *mlx_window)
+void print_map_screen(t_data data, t_map map, int *co)
 {
-	int i = 0;
-	int size = 8;
-	float v1[4];
-	float v2[4];
-	float v3[4];
+	t_2d	p1;
+	t_2d	p2;
+	int		i;
 
 	i = 0;
-	while (map[i].end == false)
+	while ()
+	plotLine(mlx.connection, mlx.window, p1, p2, 0xE04062);
+}
+
+
+void print_map(t_map *map, t_data data)
+{
+	int *co;
+	int		co_i;
+	int i;
+	int size;
+	float vect3[4];
+
+	size = map->width * map->height;
+	i = 0;
+	co = malloc(size * sizeof(int));
+	co_i = 0;
+	while (i < size)
 	{
-		v1[0] = i % size;
-		v1[1] = map[i].y;
-		v1[2] = (float)(i / size);
-		v1[3] = 1.0;
-		v2[0] = i + 1 % size;
-		v2[1] = map[i + 1].y;
-		v2[2] = (float)(i + 1 / size);
-		v2[3] = 1.0;
-		v3[0] = v1[0];
-		v3[1] = map[i + 1].y;
-		v3[2] = v1[2] + 1;
-		v3[3] = 1.0;
-		if ((i + 1) % 8 != 0)
-			print_vect(mlx_co, mlx_window, v1, v2, v3);
+		vect3[0] = i % map->width;
+		vect3[1] = map->y[i];
+		vect3[2] = i / map->width;
+		vect3[3] = 1.0f;
+		create_point2D(vect3, &co[co_i]);
 		i++;
+		co_i += 2;
 	}
+	print_map_screen(data, co);
 }

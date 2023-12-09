@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 02:01:55 by bbonnet           #+#    #+#             */
-/*   Updated: 2023/12/06 16:59:13 by babonnet         ###   ########.fr       */
+/*   Updated: 2023/12/09 16:31:16 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "fdf.h"
 
 int is_valid_map(int fd);
-t_vertex *parsing_map(char *file);
-t_vertex *create_map(int fd, int size);
+t_map *parsing_map(char *file);
+t_map *ceate_map(int fd, int size);
 
 #endif

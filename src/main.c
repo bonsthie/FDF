@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:25 by bbonnet           #+#    #+#             */
-/*   Updated: 2023/12/08 08:15:02 by babonnet         ###   ########.fr       */
+/*   Updated: 2023/12/09 15:09:45 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,13 @@
 
 int main(int ac, char **av)
 {
-    void    *mlx_connection;
-    void    *mlx_window;
+	t_data		mlx;
 	t_vertex	*map;
 
 	map = parsing_map(av[1]);
-    mlx_connection = mlx_init();
-    mlx_window = mlx_new_window(mlx_connection, LENGTH, WIDTH, "test");
-	print_map(map, mlx_connection, mlx_window);
+    mlx.connection = mlx_init();
+    mlx.window = mlx_new_window(mlx.connection, LENGTH, WIDTH, "test");
+	print_map(mlx, map);
 	//t_vect2 v1, v2, v3, v4;
 
 	//v1.x = 49;
@@ -49,7 +48,7 @@ int main(int ac, char **av)
 	//plotLine(mlx_connection, mlx_window, v1, v3, 0x80BC2B);
 	//plotLine(mlx_connection, mlx_window, v3, v4, 0x8470FF);
 	//plotLine(mlx_connection, mlx_window, v4, v2, 0xFFFFFFF);
-    mlx_loop(mlx_connection);
+    mlx_loop(mlx.connection);
 	(void)av;
     return (ac);
 }
