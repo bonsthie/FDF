@@ -16,7 +16,7 @@ YELLOW = \033[1;33m
 NC = \033[0m 
 
 
-LIBRARIES = LIBFT LIBMLX
+LIBRARIES = LIBFT LIBMLX FT_PRINTF
 
 LIBFT_FLAG = -lft
 LIBFT_DIR = libft
@@ -25,6 +25,11 @@ LIBFT_INCLUDE = .
 LIBMLX_DIR = MacroLibX
 LIBMLX_FLAG = -lm -lmlx -lSDL2 -Wl,-rpath,$(LIBMLX_DIR)
 LIBMLX_INCLUDE = includes
+
+FT_PRINTF_DIR = ft_printf
+FT_PRINTF_FLAG = -lftprintf
+FT_PRINTF_INCLUDE  = .
+
 
 LIB = $(foreach lib,$(LIBRARIES),-L $($(lib)_DIR) $($(lib)_FLAG))
 LIB_DIR = $(foreach lib,$(LIBRARIES),-I $($(lib)_DIR)/$($(lib)_INCLUDE))
@@ -43,7 +48,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 libraries:
 	@echo "$(YELLOW)Building libraries...$(NC)"
-	$(foreach lib,$(LIBRARIES), $(MAKE) -C $($(lib)_DIR);)
+	$(foreach lib,$(LIBRARIES), $(MAKE) -C $($(lib)_DIR) -j;)
 
 clean:
 	@echo "$(RED)Cleaning object files...$(NC)"

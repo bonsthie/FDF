@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 00:52:47 by bbonnet           #+#    #+#             */
-/*   Updated: 2023/12/06 17:00:40 by babonnet         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:49:22 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "get_next_line.h"
 #include "parsing.h"
 
-t_vertex *parsing_map(char *file)
+t_map *parsing_map(char *file)
 {
     int     fd;
-    t_vertex *map;
+    t_map   *map;
     int     size;
 
     fd = open(file, O_RDONLY);

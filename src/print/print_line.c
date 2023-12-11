@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:41:52 by babonnet          #+#    #+#             */
-/*   Updated: 2023/12/08 08:10:38 by babonnet         ###   ########.fr       */
+/*   Updated: 2023/12/09 23:54:00 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 #include <stdlib.h>
 
 #define abs(value) ((value > 0) ? value : -value)
+#define WIDTH 720
+#define HEIGTH WIDTH * 9 / 16
 
-void	plot_line_low(void *mlx_connection, void *mlx_window, t_vect2 v1, t_vect2 v2, int color)
+void	plot_line_low(t_data mlx, int *v1, int *v2, int color)
 {
 	int	dx;
 	int	dz;
@@ -29,19 +31,21 @@ void	plot_line_low(void *mlx_connection, void *mlx_window, t_vect2 v1, t_vect2 v
 	int	x;
 
 	yi = 1;
-	dx = v2.x - v1.x;
-	dz = v2.z - v1.z;
+	dx = v2[0] - v1[0];
+	dz = v2[1] - v1[1];
 	if (dz < 0)
 	{
 		yi = -1;
 		dz = -dz;
 	}
 	D = (2 * dz) - dx;
-	z = v1.z;
-	x = v1.x;
-	while (x < v2.x)
+	z = v1[1];
+	x = v1[0];
+	printf("x1 = %d y1 = %d x2 = %d y2 = %d\nn", v1[0], v1[1], v2[0], v2[1]);
+	while (x < v2[0])
 	{
-		mlx_pixel_put(mlx_connection, mlx_window, x, z, color);
+		if (x <= WIDTH && z <= HEIGTH)
+			mlx_pixel_put(mlx.connection, mlx.window, x, z, color);
 		if (D > 0)
 		{
 			z += yi;
@@ -54,13 +58,13 @@ void	plot_line_low(void *mlx_connection, void *mlx_window, t_vect2 v1, t_vect2 v
 }
 
 
-void plot_line_high(void *mlx_connection, void *mlx_window, t_vect2 v1, t_vect2 v2, int color)
+void plot_line_high(t_data mlx, int *v1, int *v2, int color)
 {
-    int dx = v2.x - v1.x;
-    int dy = v2.z - v1.z; // Renamed dz to dy for clarity
+    int dx = v2[0] - v1[0];
+    int dy = v2[1] - v1[1]; // Renamed dz to dy for clarity
     int xi = 1;
     int D = 2*dx - dy;
-    int x = v1.x;
+    int x = v1[0];
 
     if (dx < 0)
     {
@@ -68,9 +72,11 @@ void plot_line_high(void *mlx_connection, void *mlx_window, t_vect2 v1, t_vect2 
         dx = -dx;
     }
 
-    for (int y = v1.z; y <= v2.z; y++)
+	printf("x1 = %d y1 = %d x2 = %d y2 = %d\n", v1[0], v1[1], v2[0], v2[1]);
+    for (int y = v1[1]; y <= v2[1]; y++)
     {
-        mlx_pixel_put(mlx_connection, mlx_window, x, y, color);
+		if (x <= WIDTH && y <= HEIGTH)
+			mlx_pixel_put(mlx.connection, mlx.window, x, y, color);
         if (D > 0)
         {
             x += xi;
@@ -84,32 +90,32 @@ void plot_line_high(void *mlx_connection, void *mlx_window, t_vect2 v1, t_vect2 
 }
 
 
-void	plotLine(void *mlx_connection, void *mlx_window, t_vect2 v1, t_vect2 v2, int color)
+void	plot_line(t_data data, int *v1, int *v2, int color)
 {
-	if (abs(v2.z - v1.z) < abs(v2.x - v1.x))
+	if (abs(v2[1]- v1[1]) < abs(v2[0] - v1[0]))
 	{
-		if (v1.x > v2.x)
+		if (v1[0] > v2[0])
 		{
 			printf("1\n");
-			plot_line_high(mlx_connection, mlx_window, v2, v1, color);
+			plot_line_high(data, v2, v1, color);
 		}
 		else
 		{
 			printf("2\n"); //good
-			plot_line_low(mlx_connection, mlx_window, v1, v2, color);
+			plot_line_low(data, v1, v2, color);
 		}
 	}
 	else
 	{
-		if (v1.z > v2.z)
+		if (v1[1] > v2[1])
 		{
 			printf("3\n"); //bad
-			plot_line_high(mlx_connection, mlx_window, v2, v1, color);
+			plot_line_high(data, v2, v1, color);
 		}
 		else
 		{
 			printf("4\n"); //bad0xFFFFFFFF
-			plot_line_high(mlx_connection, mlx_window, v1, v2, color);
+			plot_line_high(data, v1, v2, color);
 		}
 	}
 }

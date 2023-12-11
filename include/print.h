@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:46:27 by babonnet          #+#    #+#             */
-/*   Updated: 2023/12/09 16:42:59 by babonnet         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:13:09 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 #include "fdf.h"
 
-void	plotLine(void *mlx_connection, void *mlx_window, t_2d v1, t_2d v2, int color);
-void	plot_line_high(void *mlx_connection, void *mlx_window, t_2d v1, t_2d v2, int color);
-void	plot_line_low(void *mlx_connection, void *mlx_window, t_2d v1, t_2d v2, int color);
-void	print_map(t_map *map, void *mlx_co, void *mlx_window);
+void	plot_line(t_data data, int *v1, int *v2, int color);
+void plot_line_high(t_data mlx, int *v1, int *v2, int color);
+void	plot_line_low(t_data mlx, int *v1, int *v2, int color);
+void	print_map(t_map *map, t_data mlx);
 
 #endif

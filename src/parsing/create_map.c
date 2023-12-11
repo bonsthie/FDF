@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 02:04:29 by bbonnet           #+#    #+#             */
-/*   Updated: 2023/12/09 16:16:45 by babonnet         ###   ########.fr       */
+/*   Updated: 2023/12/09 21:45:50 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include "fdf.h"
 #include "limit.h"
 #include "libft.h"
+
+
+#include <stdio.h>
 
 int fill_line(int fd, t_map *map, int start)
 {
@@ -48,15 +51,19 @@ t_map *create_map(int fd, int size)
 
 	map = malloc(sizeof(t_map));
     map->y = malloc(size * sizeof(float));
+	map->height = 0;
     if (!map)
         return (NULL);
     i = 0;
-    while(i <= size)
+    while(i < size)
     {
         tmp = fill_line(fd, map, i);
 		if (tmp == -2147483648)
 			break;
 		i += tmp;
+		map->height++;
     }
+	map->width = tmp;
+	printf("width ==%d  height == %d", map->width, map->height);
 	return (map);
 }
