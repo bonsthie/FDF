@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:25 by bbonnet           #+#    #+#             */
-/*   Updated: 2023/12/11 20:19:55 by babonnet         ###   ########.fr       */
+/*   Updated: 2023/12/13 13:59:24 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ int main(int ac, char **av)
 	map = parsing_map(av[1]);
 	for (int i = 0; i < map->width * map->height; i++)
 		printf("%d = %.1f \n", i, map->y[i]);
+	mlx.image = NULL;
     mlx.connection = mlx_init();
     mlx.window = mlx_new_window(mlx.connection, LENGTH, WIDTH, "FDF");
-	map->yaw = 0.5f;
-	map->pitch = 0.5f;
+	map->yaw = 0.1f;
+	map->pitch = 0.1f;	
 	print_map(map, mlx);
     mlx_loop(mlx.connection);
 	(void)av;

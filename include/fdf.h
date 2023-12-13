@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:38 by bbonnet           #+#    #+#             */
-/*   Updated: 2023/12/11 16:26:55 by babonnet         ###   ########.fr       */
+/*   Updated: 2023/12/12 20:45:30 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_data
 {
 	void *connection;
 	void *window;
+	void *image;
 } t_data;
 
 typedef struct s_2d
