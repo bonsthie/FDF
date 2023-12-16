@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
+/*   By: bbonnet <bbonnet@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:48:42 by babonnet          #+#    #+#             */
-/*   Updated: 2023/12/13 19:02:49 by babonnet         ###   ########.fr       */
+/*   Updated: 2023/12/16 01:21:34 by bbonnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,34 +112,46 @@ float *fov(void) {
 void create_point2D(float *vect3, int *coord, float pitch, float yaw)
 {
 	float *m_fov = matrix_multiplication1x4(vect3, orientation(pitch, yaw));
-	float zoom = 0.3;
+	float zoom = 0.2;
 	float offset = 100;
 	//float *m_fov = matrix_multiplication1x4(m_orientation, fov());
+    printf("after matrix x = %.1f y = %.1f z = %.1f w == %.1f\n", vect3[0], vect3[1], vect3[2], vect3[3]);
 
 	coord[0] = ((m_fov[0]/ m_fov[3]) + 1) * (WIDTH / 2.0) * zoom + offset;
 	coord[1] = ((m_fov[1] / m_fov[3]) + 1) * ((float)HEIGHT / 2.0) * zoom + offset;
 }
 
+
 void print_map_screen(t_data data, t_map *map, int *coord)
 {
-	int		size;
-	int		i;
+    int i = 0;
+    int j = 0;
+    int coord_index = 0;
 
-	i = 0;
-	if (data.image != NULL)
-		mlx_destroy_image(data.connection, data.image);
-	data.image = mlx_new_image(data.connection, WIDTH, HEIGHT);
-	size = map->height * map->width;
-	while (i < size)
-	{
-		plot_line(data, &coord[i], &coord[i + 2 * map->width], 0xffffffff);
-		plot_line(data, &coord[i], &coord[i + 2], 0xE04062ff);
-		if (i + 1 == map->width)
-			plot_line(data, &coord[i], &coord[i + map->width + 2], 0xffffffff);
-		i++;
-	}
-	mlx_put_image_to_window(data.connection, data.window, data.image, 0, 0);
+    if (data.image != NULL)
+        mlx_destroy_image(data.connection, data.image);
+    data.image = mlx_new_image(data.connection, WIDTH, HEIGHT);
+
+    while (i < map->height) {
+        j = 0;
+        while (j < map->width) {
+            coord_index = (i * map->width + j) * 2;
+
+            if (j < map->width - 1)
+                plot_line(data, &coord[coord_index], &coord[coord_index + 2], 0xE04062ff);
+            if (i < map->height - 1) {
+                int index_below = coord_index + map->width * 2;
+                plot_line(data, &coord[coord_index], &coord[index_below], 0xffffffff);
+            }
+
+            j++;
+        }
+        i++;
+    }
+
+    mlx_put_image_to_window(data.connection, data.window, data.image, 0, 0);
 }
+
 
 
 void print_map(t_map *map, t_data data)
@@ -152,7 +164,7 @@ void print_map(t_map *map, t_data data)
 
 	size = map->width * map->height;
 	i = 0;
-	coord = malloc(size * sizeof(int));
+	coord = malloc(2 * size * sizeof(int));
 	co_i = 0;
 	while (i < size)
 	{
@@ -160,7 +172,7 @@ void print_map(t_map *map, t_data data)
 		vect3[1] = map->y[i];
 		vect3[2] = (int)(i / map->width);
 		vect3[3] = 1.0f;
-		printf("x = %.1f y = %.1f z = %.1f\n", vect3[0], vect3[1], vect3[2]);
+        printf("before :x = %.1f y = %.1f z = %.1f w == %.1f\n", vect3[0], vect3[1], vect3[2], vect3[3]);
 		create_point2D(vect3, &coord[co_i], map->pitch, map->yaw);
 		i++;
 		co_i += 2;
