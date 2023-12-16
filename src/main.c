@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonnet <bbonnet@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:25 by bbonnet           #+#    #+#             */
-/*   Updated: 2023/12/16 01:22:40 by bbonnet          ###   ########.fr       */
+/*   Updated: 2023/12/16 17:43:08 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ int main(int ac, char **av)
     mlx.window = mlx_new_window(mlx.connection, LENGTH, WIDTH, "FDF");
 	map->yaw = 0.8f;
 	map->pitch = 0.7f;	
+	map->zoom = 0.2f;
+	map->offset_x = 0.0;
+	map->offset_y = 0.0;
 	print_map(map, mlx);
     mlx_loop(mlx.connection);
 	(void)av;
