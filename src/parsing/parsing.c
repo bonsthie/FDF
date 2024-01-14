@@ -6,12 +6,12 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 00:52:47 by bbonnet           #+#    #+#             */
-/*   Updated: 2023/12/12 20:57:13 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/01/14 00:57:54 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "get_next_line.h"
+#include <fcntl.h>
 #include "parsing.h"
 
 t_map *parsing_map(char *file)

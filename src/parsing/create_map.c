@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 02:04:29 by bbonnet           #+#    #+#             */
-/*   Updated: 2023/12/09 21:45:50 by babonnet         ###   ########.fr       */
+/*   Updated: 2023/12/18 14:26:22 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ int fill_line(int fd, t_map *map, int start)
 	line = get_next_line(fd);
 	if (!line)
 		return (-2147483648);
+	//char **parse_line = ft_split(line, ' ');
+	//while(*parse_line)
+	//{
+	//	map->y[start + count] = ft_atoi[count];
+	//	count++;
+	//}
+	//free(pare_line);
+	//free(line);
 	while (line[i])
 	{
 		while (line[i] == ' ' && line[i])

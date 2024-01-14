@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:38 by bbonnet           #+#    #+#             */
-/*   Updated: 2023/12/16 17:41:09 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/01/14 22:18:57 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_map
 	float	pitch;
 	float	yaw;
 	float	zoom;
+	float	zoom_count;
 	float	offset_x;
 	float	offset_y;
 }			t_map;
