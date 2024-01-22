@@ -58,7 +58,7 @@ t_map *create_map(int fd, int size)
 	int		tmp;
 
 	map = malloc(sizeof(t_map));
-    map->y = malloc(size * sizeof(float));
+    map->y = malloc(size * sizeof(double));
 	map->height = 0;
     if (!map)
         return (NULL);

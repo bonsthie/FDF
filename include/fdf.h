@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:38 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/01/14 22:18:57 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/01/21 18:47:24 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <stdbool.h>
 # include <unistd.h>
+
+#define WIDTH 720
+#define HEIGHT 720 * 9 / 16
 
 typedef struct s_data
 {
@@ -31,20 +34,20 @@ typedef struct s_2d
 
 typedef struct s_vect3
 {
-	float	vect3[4];
+	double	vect3[4];
 }			t_vect3;
 
 typedef struct s_map
 {
-	float	*y;
+	double	*y;
 	int		width;
 	int		height;
-	float	pitch;
-	float	yaw;
-	float	zoom;
-	float	zoom_count;
-	float	offset_x;
-	float	offset_y;
+	double	pitch;
+	double	yaw;
+	double	zoom;
+	double	zoom_count;
+	double	offset_x;
+	double	offset_y;
 }			t_map;
 
 #endif

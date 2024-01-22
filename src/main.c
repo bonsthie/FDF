@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:25 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/01/15 00:07:43 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/01/22 01:03:37 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 #include "fdf.h"
 #include "print.h"
 #include "parsing/parsing.h"
-
-#define LENGTH 720
-#define WIDTH LENGTH * 9 / 16
-
 
 #include <stdio.h>
 
@@ -30,10 +26,10 @@ void refresh_screen(t_data data)
 	int j;
 
 	i = 0;
-	while (i < LENGTH)
+	while (i < WIDTH)
 	{
 		j = 0;
-		while (j < WIDTH)
+		while (j < HEIGHT)
 		{
 			mlx_set_image_pixel(data.connection, data.image, i, j, 0x00000000);
 			j++;
@@ -55,16 +51,22 @@ int keyup_hook(int key, void* param)
 
 	map = param;
 	if (key == 79)
-		map->offset_x += 0.1f;
+		map->offset_x += 0.1;
 	else if (key == 80)
-		map->offset_x -= 0.1f;
+		map->offset_x -= 0.1;
 	else if (key == 82)
-		map->offset_y -= 0.1f;
+		map->offset_y -= 0.1;
 	else if (key == 81)
-		map->offset_y += 0.1f;
-	else 
-		return (1);
-	//printf("hook %d", key);
+		map->offset_y += 0.1;
+	else if (key == 26)
+		map->pitch += 0.1;
+	else if (key == 22)
+		map->pitch -= 0.1;
+	else if (key == 4)
+		map->yaw += 0.1;
+	else if (key == 7)
+		map->yaw -= 0.1;
+	printf("%d\n", key);
 	refresh_screen(mlx);
 	print_map(map, mlx);
 
@@ -109,8 +111,8 @@ int mousewheel(int key, void *param)
 		return (1);
 	map->zoom = map->zoom_count;
 	mlx_mouse_get_pos(mlx.connection, &x, &y);
-	map->offset_x = x - (x - map->offset_x) * map->zoom;
-    map->offset_y = y - (y - map->offset_y) * map->zoom;
+	//map->offset_x = x - (x - map->offset_x) * map->zoom;
+    //map->offset_y = y - (y - map->offset_y) * map->zoom;
 	printf("zooom ======= %.2f\n", map->zoom);
 	refresh_screen(mlx);
 	print_map(map, mlx);
@@ -123,18 +125,20 @@ int main(int ac, char **av)
 	t_map	*map;
 
 	map = parsing_map(av[1]);
+	if (!map)
+		return (1);
 	for (int i = 0; i < map->width * map->height; i++)
 		printf("%d = %.1f \n", i, map->y[i]);
 	mlx.image = NULL;
     mlx.connection = mlx_init();
-    mlx.window = mlx_new_window(mlx.connection, LENGTH, WIDTH, "FDF");
-	map->yaw = 0.8f;
-	map->pitch = 0.7f;	
-	map->zoom_count = 0.2f;
+    mlx.window = mlx_new_window(mlx.connection, WIDTH, HEIGHT, "FDF");
+	map->yaw = 0.8;
+	map->pitch = 0.7;	
+	map->zoom_count = 0.2;
 	map->zoom = map->zoom_count;
-	map->offset_x = 0.0;
 	map->offset_y = 0.0;
-	mlx.image = mlx_new_image(mlx.connection, LENGTH, WIDTH);
+	map->offset_x = 0.0;
+	mlx.image = mlx_new_image(mlx.connection, WIDTH, HEIGHT);
 	print_map(map, mlx);
 
 

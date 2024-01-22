@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:41:52 by babonnet          #+#    #+#             */
-/*   Updated: 2024/01/14 21:03:28 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/01/22 00:21:33 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,107 +17,47 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define abs(value) ((value > 0) ? value : -value)
-#define WIDTH 720
-#define HEIGTH WIDTH * 9 / 16
-
-void	plot_line_low(t_data mlx, int *v1, int *v2, int color)
+void	plot_line(t_data mlx, int *v1, int *v2, int color)
 {
-	int	dx;
-	int	dz;
-	int	yi;
-	int	D;
-	int	y;
-	int	x;
-
-	yi = 1;
-	dx = v2[0] - v1[0];
-	dz = v2[1] - v1[1];
-	if (dz < 0)
-	{
-		yi = -1;
-		dz = -dz;
-	}
-	D = (2 * dz) - dx;
-	y = v1[1];
-	x = v1[0];
-	//printf("x1 = %d y1 = %d x2 = %d y2 = %d\nn", v1[0], v1[1], v2[0], v2[1]);
-	while (x < v2[0])
-	{
-		if (x <= WIDTH && y <= HEIGTH)
-			mlx_set_image_pixel(mlx.connection, mlx.image, x, y, color);
-		if (D > 0)
-		{
-			y += yi;
-			D += 2 * (dz - dx);
-		}
-		else
-			D += 2 * dz;
-		x++;
-	}
-}
-
-void	plot_line_high(t_data mlx, int *v1, int *v2, int color)
-{
+	int	x1;
+	int	y1;
+	int	x2;
+	int	y2;
 	int	dx;
 	int	dy;
-	int	xi;
-	int	D;
-	int	x;
+	int	sy;
+	int	sx;
+	int	err;
+	int e2;
 
-	dx = v2[0] - v1[0];
-	dy = v2[1] - v1[1];
-	xi = 1;
-	D = 2 * dx - dy;
-	x = v1[0];
-	if (dx < 0)
+	x1 = v1[0];
+	y1 = v1[1];
+	x2 = v2[0];
+	y2 = v2[1];
+	sx = -1;
+	sy = -1;
+	dx = abs(x2 - x1);
+	if (x1 < x2)
+		sx = 1;
+	dy = -abs(y2 - y1);
+	if (y1 < y2)
+		sy = 1;
+	err = dx + dy;
+	while (1)
 	{
-		xi = -1;
-		dx = -dx;
-	}
-	//printf("x1 = %d y1 = %d x2 = %d y2 = %d\n", v1[0], v1[1], v2[0], v2[1]);
-	for (int y = v1[1]; y <= v2[1]; y++)
-	{
-		if (x <= WIDTH && y <= HEIGTH)
-			mlx_set_image_pixel(mlx.connection, mlx.image, x, y, color);
-		if (D > 0)
+		mlx_set_image_pixel(mlx.connection, mlx.image, x1, y1, color);
+		if (x1 == x2 && y1 == y2)
+			break ;
+		e2 = 2 * err;
+		if (e2 >= dy)
 		{
-			x += xi;
-			D += 2 * (dx - dy);
+			err += dy;
+			x1 += sx;
 		}
-		else
+		if (e2 <= dx)
 		{
-			D += 2 * dx;
-		}
-	}
-}
-
-void	plot_line(t_data data, int *v1, int *v2, int color)
-{
-	if (abs(v2[1] - v1[1]) < abs(v2[0] - v1[0]))
-	{
-		if (v1[0] > v2[0])
-		{
-			//printf("1\n");
-			plot_line_high(data, v2, v1, color);
-		}
-		else
-		{
-			//printf("2\n");
-			plot_line_low(data, v1, v2, color);
-		}
-	}
-	else
-	{
-		if (v1[1] > v2[1])
-		{
-			//printf("3\n");
-			plot_line_high(data, v2, v1, color);
-		}
-		else
-		{
-			//printf("4\n");
-			plot_line_high(data, v1, v2, color);
+			err += dx;
+			y1 += sy;
 		}
 	}
 }
