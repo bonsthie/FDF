@@ -6,17 +6,17 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:12:20 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/08 16:40:52 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:39:24 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 
-void apparition_animation(t_map *map)
+void	apparition_animation(t_map *map)
 {
-	static float yaw = 0.8;
-	static float pitch = 1.5;
-	t_data *mlx;
+	static float	yaw = 0.8;
+	static float	pitch = 1.5;
+	t_data			*mlx;
 
 	mlx = map->mlx;
 	print_map(map, mlx);
@@ -26,7 +26,8 @@ void apparition_animation(t_map *map)
 		map->yaw -= yaw;
 	if (map->zoom > map->zoom_start)
 		map->zoom -= map->zoom_start * 0.05;
-	if (map->pitch <= 210.0 && map->yaw <= 322.0 && map->zoom <= map->zoom_start)
+	if (map->pitch <= 210.0 && map->yaw <= 322.0
+		&& map->zoom <= map->zoom_start)
 		map->start = false;
 	if (yaw > 0.1)
 	{

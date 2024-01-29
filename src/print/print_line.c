@@ -6,15 +6,13 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:41:52 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/07 01:09:20 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:40:51 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
 #include "print.h"
-#include <math.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 void	plot_line(t_data *mlx, int *v1, int *v2, int color)

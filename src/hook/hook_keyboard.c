@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook.c                                             :+:      :+:    :+:   */
+/*   hook_keyboard.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 21:00:22 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/07 13:31:06 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:34:45 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "print.h"
-#include "mlx.h"
-#include <math.h>
 #include <stdio.h>
-
 
 int	keyup_hook(int key, void *param)
 {
@@ -45,6 +42,3 @@ int	keyup_hook(int key, void *param)
 	print_map(map, map->mlx);
 	return (0);
 }
-
-
-

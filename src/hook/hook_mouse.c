@@ -6,11 +6,12 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:31:23 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/08 19:02:00 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:35:14 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "mlx.h"
 #include "print.h"
 
 int	mousedown_hook(int key, void *param)
@@ -48,12 +49,12 @@ int	mouseup_hook(int key, void *param)
 		map->mouse_y = -1;
 		map->mouse_rotation = false;
 	}
-	else 
+	else
 		return (1);
 	return (0);
 }
 
-int	mousewheel(int key, void *param)
+int	mousewheel_hook(int key, void *param)
 {
 	t_map	*map;
 
@@ -63,7 +64,6 @@ int	mousewheel(int key, void *param)
 		map->zoom *= 1.07;
 		print_map(map, map->mlx);
 	}
-	// Zoom out
 	else if (key == 2)
 	{
 		map->zoom /= 1.03;
@@ -74,4 +74,44 @@ int	mousewheel(int key, void *param)
 	else
 		return (1);
 	return (0);
+}
+
+void	mouse_translation(t_map *map)
+{
+	int		x;
+	int		y;
+	t_data	*mlx;
+
+	mlx = map->mlx;
+	if (map->mouse_x != -1)
+	{
+		mlx_mouse_get_pos(mlx->connection, &x, &y);
+		map->offset_x += (x - map->mouse_x);
+		map->offset_y += (y - map->mouse_y);
+		map->mouse_x = x;
+		map->mouse_y = y;
+	}
+	mlx_mouse_get_pos(mlx->connection, &map->mouse_x, &map->mouse_y);
+	refresh_screen(map->mlx);
+	print_map(map, map->mlx);
+}
+
+void	mouse_rotation(t_map *map)
+{
+	int		x;
+	int		y;
+	t_data	*mlx;
+
+	mlx = map->mlx;
+	if (map->mouse_x != -1)
+	{
+		mlx_mouse_get_pos(mlx->connection, &x, &y);
+		map->yaw += (x - map->mouse_x) * 0.3;
+		map->pitch += (y - map->mouse_y) * 0.3;
+		map->mouse_x = x;
+		map->mouse_y = y;
+	}
+	mlx_mouse_get_pos(mlx->connection, &map->mouse_x, &map->mouse_y);
+	refresh_screen(map->mlx);
+	print_map(map, map->mlx);
 }

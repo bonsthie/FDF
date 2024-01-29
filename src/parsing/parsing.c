@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 00:52:47 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/07 09:13:24 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:40:10 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	check_line_size(int line_size, char **strs)
 			return (-1);
 		new_size++;
 		if (!strs[new_size])
-			break;
+			break ;
 		if (!ft_strncmp(strs[new_size], "0x", 2))
 			strs++;
 	}
@@ -70,7 +70,7 @@ t_list	*get_map_from_file(int fd)
 	return (head);
 }
 
-void strs_to_point(char **strs, double *y, int *color)
+void	strs_to_point(char **strs, double *y, int *color)
 {
 	if (!strs)
 		return ;
@@ -79,10 +79,10 @@ void strs_to_point(char **strs, double *y, int *color)
 		*y = ft_atoi(*strs);
 		strs++;
 		if (!*strs)
-			break;
+			break ;
 		if (!ft_strncmp(*strs, "0x", 2))
 		{
-			*color = strtol(*strs, NULL, 0); //need to change that
+			*color = strtol(*strs, NULL, 0); // need to change that
 			strs++;
 		}
 		else
@@ -92,9 +92,9 @@ void strs_to_point(char **strs, double *y, int *color)
 	}
 }
 
-int fill_map_point(t_map *map, t_list *head)
+int	fill_map_point(t_map *map, t_list *head)
 {
-	int position;
+	int	position;
 
 	map->y = malloc(map->height * map->width * sizeof(double));
 	if (!map->y)
@@ -115,9 +115,9 @@ int fill_map_point(t_map *map, t_list *head)
 	return (0);
 }
 
-t_map *fill_map2(t_list *head)
+t_map	*fill_map2(t_list *head)
 {
-	t_map *map;
+	t_map	*map;
 
 	map = malloc(sizeof(t_map));
 	if (!map)
@@ -134,18 +134,18 @@ t_map *fill_map2(t_list *head)
 
 t_map	*parsing_map(char *file)
 {
-	//mangage letter in the file
 	t_map	*map;
 	t_list	*head;
 	int		fd;
 
+	// mangage letter in the file
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
 	head = get_map_from_file(fd);
 	if (!head)
 		return (NULL);
-	map = fill_map2(head);	
+	map = fill_map2(head);
 	ft_lstclear(&head, pop);
 	return (map);
 }

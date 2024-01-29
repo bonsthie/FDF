@@ -1,4 +1,4 @@
-NAME = FDF
+NAME = fdf
 
 CC = clang
 DEBUG = -g
