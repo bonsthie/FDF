@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:41:52 by babonnet          #+#    #+#             */
-/*   Updated: 2024/01/22 00:21:33 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/01/29 20:19:40 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	plot_line(t_data mlx, int *v1, int *v2, int color)
 	int	sy;
 	int	sx;
 	int	err;
-	int e2;
+	int	e2;
 
 	x1 = v1[0];
 	y1 = v1[1];

@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:38 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/01/21 18:47:24 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:09:31 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,16 @@ typedef struct s_data
 	void	*image;
 }			t_data;
 
-typedef struct s_2d
-{
-	int		x;
-	int		y;
-}			t_2d;
-
-typedef struct s_vect3
-{
-	double	vect3[4];
-}			t_vect3;
-
 typedef struct s_map
 {
+	t_data  *mlx;
 	double	*y;
+	int		*color;
 	int		width;
 	int		height;
 	double	pitch;
 	double	yaw;
 	double	zoom;
-	double	zoom_count;
 	double	offset_x;
 	double	offset_y;
 }			t_map;
