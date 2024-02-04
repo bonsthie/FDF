@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:38 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/01/30 19:09:31 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/01/31 21:18:16 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #define WIDTH 720
 #define HEIGHT 720 * 9 / 16
 
+
 typedef struct s_data
 {
 	void	*connection;
@@ -28,7 +29,7 @@ typedef struct s_data
 
 typedef struct s_map
 {
-	t_data  *mlx;
+	t_data  mlx;
 	double	*y;
 	int		*color;
 	int		width;
@@ -39,5 +40,7 @@ typedef struct s_map
 	double	offset_x;
 	double	offset_y;
 }			t_map;
+
+void	refresh_screen(t_data data);
 
 #endif
