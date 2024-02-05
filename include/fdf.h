@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:38 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/01/31 21:18:16 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/05 20:57:21 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,15 @@
 # include <stdbool.h>
 # include <unistd.h>
 
-#define WIDTH 720
-#define HEIGHT 720 * 9 / 16
+#ifndef WIDTH
+# define WIDTH 1080
+#endif
 
+#ifndef HEIGHT
+# define HEIGHT 1080 * 9 / 16
+#endif
+
+typedef double vec4d __attribute__((vector_size(4 * sizeof(double))));
 
 typedef struct s_data
 {
@@ -42,5 +48,7 @@ typedef struct s_map
 }			t_map;
 
 void	refresh_screen(t_data data);
+void matrix_multiplication4x4(vec4d result[4], vec4d a[4], vec4d b[4]);
+void	create_transformation_matrix(vec4d *transformation, t_map map);
 
 #endif

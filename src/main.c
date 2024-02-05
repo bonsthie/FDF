@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:25 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/04 17:28:01 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/05 20:57:59 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ int	main(int ac, char **av)
 		map);
 	mlx_on_event(map->mlx.connection, map->mlx.window, MLX_MOUSEWHEEL, mousewheel, map);
 	mlx_loop(map->mlx.connection);
-	(void)av;
-	return (ac);
 	mlx_destroy_window(map->mlx.connection, map->mlx.window);
 	mlx_destroy_display(map->mlx.connection);
+	(void)ac;
 }

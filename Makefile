@@ -2,7 +2,7 @@ NAME = FDF
 
 CC = clang
 DEBUG = -g
-CFLAGS = -Wall -Wextra -Werror -o3 -march=native -pg
+CFLAGS = -Wall -Wextra -Werror -mavx
 SRC_DIR = src
 OBJ_DIR = obj
 HSRCS = include
@@ -16,7 +16,7 @@ YELLOW = \033[1;33m
 NC = \033[0m 
 
 
-LIBRARIES = LIBFT LIBMLX FT_PRINTF
+LIBRARIES = LIBFT LIBMLX
 
 LIBFT_FLAG = -lft
 LIBFT_DIR = libft
@@ -25,11 +25,6 @@ LIBFT_INCLUDE = .
 LIBMLX_DIR = MacroLibX
 LIBMLX_FLAG = -lm -lmlx -lSDL2 -Wl,-rpath,$(LIBMLX_DIR)
 LIBMLX_INCLUDE = includes
-
-FT_PRINTF_DIR = ft_printf
-FT_PRINTF_FLAG = -lftprintf
-FT_PRINTF_INCLUDE  = .
-
 
 LIB = $(foreach lib,$(LIBRARIES),-L $($(lib)_DIR) $($(lib)_FLAG))
 LIB_DIR = $(foreach lib,$(LIBRARIES),-I $($(lib)_DIR)/$($(lib)_INCLUDE))

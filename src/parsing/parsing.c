@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 00:52:47 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/02 17:52:36 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/05 16:42:39 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include "parsing.h"
 #include <fcntl.h>
+#include <stdio.h>
 
 void	pop(void *value)
 {
