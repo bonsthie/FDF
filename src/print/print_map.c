@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:48:42 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/05 20:33:50 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/07 09:11:31 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,11 @@
 #include "mlx.h"
 #include "print.h"
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 
-//void create_transformation_matrix(vec4d *transformation, double pitch, double yaw, double zoom, double offset_x, double offset_y) {
-//    pitch *= (M_PI / 180.0); 
-//    yaw *= (M_PI / 180.0);
-//    double cosPitch = cos(pitch), sinPitch = sin(pitch);
-//    double cosYaw = cos(yaw), sinYaw = sin(yaw);
-//
-//    vec4d pitchMatrix[4] = {
-//		{ 1, 0, 0, -offset_x, },
-//        { 0, cosPitch, -sinPitch, -offset_y, },
-//        { 0, sinPitch, cosPitch, 0,  },
-//        { 0, 0, 0, 1 }
-//    };
-//    vec4d yawMatrix[4] = {
-//		{cosYaw, 0, sinYaw, -offset_x},
-//		{ 0, 1, 0, -offset_y,},
-//		{-sinYaw, 0, cosYaw, 0},
-//		{0, 0, 0, 1}
-//    };
-//    vec4d scaleMatrix[4] = {
-//		{ zoom, 0, 0, offset_x },
-//        { 0, zoom, 0, offset_y },
-//        { 0, 0, zoom, 0 },
-//        { 0, 0, 0, 1 }
-//    };
-//
-//    vec4d tempMatrix[4];
-//    matrix_multiplication4x4(tempMatrix, pitchMatrix, yawMatrix);
-//    matrix_multiplication4x4(transformation, tempMatrix, scaleMatrix);
-//}
-
 __attribute__((always_inline))
-void matrix_multiplication1x4(vec4d *matrix, vec4d vector, vec4d *result) {
+inline void matrix_multiplication1x4(vec4d *matrix, vec4d vector, vec4d *result) {
 	int i;
 	vec4d product;
 	double dot_product;
@@ -64,16 +35,16 @@ void matrix_multiplication1x4(vec4d *matrix, vec4d vector, vec4d *result) {
 }
 
 
-void	create_point2D(vec4d vect3, int *coord, vec4d *orientation)
+void	create_point2D(vec4d vect3, int *coord, vec4d *orientation, t_map map)
 {
 	vec4d	m_fov;
 
 	matrix_multiplication1x4(orientation, vect3, &m_fov);
-	coord[0] = (int)(m_fov[0] + 1);
-	coord[1] = (int)(m_fov[1] + 1);
+	coord[0] = (int)(m_fov[0] + map.offset_x);
+	coord[1] = (int)(m_fov[1] + map.offset_y);
 }
 
-void	print_map_screen(t_data data, t_map *map, int *coord)
+void	print_map_screen(t_data *mlx, t_map *map, int *coord)
 {
 	int	i;
 	int	j;
@@ -90,22 +61,23 @@ void	print_map_screen(t_data data, t_map *map, int *coord)
 		{
 			coord_index = (i * map->width + j) * 2;
 			if (j < map->width - 1)
-				plot_line(data, &coord[coord_index], &coord[coord_index + 2],
+				plot_line(mlx, &coord[coord_index], &coord[coord_index + 2],
 					0xE04062ff);
 			if (i < map->height - 1)
 			{
 				index_below = coord_index + map->width * 2;
-				plot_line(data, &coord[coord_index], &coord[index_below],
+				plot_line(mlx, &coord[coord_index], &coord[index_below],
 					0xffffffff);
 			}
 			j++;
 		}
 		i++;
 	}
-	mlx_put_image_to_window(data.connection, data.window, data.image, 0, 0);
+	mlx_clear_window(mlx->connection, mlx->window);
+	mlx_put_image_to_window(mlx->connection, mlx->window, mlx->image, 0, 0);
 }
 
-void	print_map(t_map *map, t_data data)
+void	print_map(t_map *map, t_data *mlx)
 {
 	int		*coord;
 	int		co_i;
@@ -113,6 +85,9 @@ void	print_map(t_map *map, t_data data)
 	int		size;
 	vec4d	vect3;
 
+	if (mlx->image != NULL)
+		mlx_destroy_image(mlx->connection, mlx->image);
+	mlx->image = mlx_new_image(mlx->connection, WIDTH, HEIGHT);
 	size = map->width * map->height;
 	coord = malloc(2 * size * sizeof(int));
 	if (!coord)
@@ -132,10 +107,10 @@ void	print_map(t_map *map, t_data data)
 		vect3[1] = map->y[i];
 		vect3[2] = (int)(i / map->width);
 		vect3[3] = 1.0;
-		create_point2D(vect3, &coord[co_i], orientation);
+		create_point2D(vect3, &coord[co_i], orientation, *map);
 		i++;
 		co_i += 2;
 	}
-	print_map_screen(data, map, coord);
+	print_map_screen(mlx, map, coord);
 	free(coord);
 }

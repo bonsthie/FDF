@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook.h                                             :+:      :+:    :+:   */
+/*   animation.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/31 20:59:09 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/07 04:03:17 by babonnet         ###   ########.fr       */
+/*   Created: 2024/02/07 10:13:15 by babonnet          #+#    #+#             */
+/*   Updated: 2024/02/07 12:19:54 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HOOK_H
-#define HOOK_H
+#ifndef ANIMATION_H
+#define ANIMATION_H
 
-int	window_hook(int event, void *param);
-int	keyup_hook(int key, void *param);
-int	mousewheel(int key, void *param);
-int	mousedown_hook(int key, void *param);
-int	mouseup_hook(int key, void *param);
+#include "print.h"
+void apparition_animation(t_map *map);
+void rotate(t_map *map);
 
 #endif

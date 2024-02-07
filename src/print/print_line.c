@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:41:52 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/01 14:40:31 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/07 01:09:20 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void	plot_line(t_data mlx, int *v1, int *v2, int color)
+void	plot_line(t_data *mlx, int *v1, int *v2, int color)
 {
 	int	x1;
 	int	y1;
@@ -46,7 +46,7 @@ void	plot_line(t_data mlx, int *v1, int *v2, int color)
 	while (1)
 	{
 		if (x1 < WIDTH && y1 < HEIGHT && x1 >= 0 && y1 >= 0)
-			mlx_set_image_pixel(mlx.connection, mlx.image, x1, y1, color);
+			mlx_set_image_pixel(mlx->connection, mlx->image, x1, y1, color);
 		if (x1 == x2 && y1 == y2)
 			break ;
 		e2 = 2 * err;

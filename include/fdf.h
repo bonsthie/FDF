@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:38 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/05 20:57:21 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:43:32 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_data
 
 typedef struct s_map
 {
-	t_data  mlx;
+	t_data  *mlx;
 	double	*y;
 	int		*color;
 	int		width;
@@ -43,11 +43,18 @@ typedef struct s_map
 	double	pitch;
 	double	yaw;
 	double	zoom;
+	double  zoom_start;
 	double	offset_x;
 	double	offset_y;
+	int		mouse_x;
+	int		mouse_y;
+	bool	start;
+	bool	rotate;
+	bool	mouse_translation;
+	bool	mouse_rotation;
 }			t_map;
 
-void	refresh_screen(t_data data);
+void	refresh_screen(t_data *data);
 void matrix_multiplication4x4(vec4d result[4], vec4d a[4], vec4d b[4]);
 void	create_transformation_matrix(vec4d *transformation, t_map map);
 
