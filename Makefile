@@ -2,7 +2,7 @@ NAME = FDF
 
 CC = clang
 DEBUG = -g
-CFLAGS = -Wall -Wextra -Werror -mavx -O3
+CFLAGS = -Wall -Wextra -Werror -mavx
 SRC_DIR = src
 OBJ_DIR = obj
 HSRCS = include

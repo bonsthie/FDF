@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:38 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/07 12:43:32 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:39:11 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_map
 
 void	refresh_screen(t_data *data);
 void matrix_multiplication4x4(vec4d result[4], vec4d a[4], vec4d b[4]);
+void matrix_multiplication1x4(vec4d *matrix, vec4d vector, vec4d *result);
 void	create_transformation_matrix(vec4d *transformation, t_map map);
 
 #endif

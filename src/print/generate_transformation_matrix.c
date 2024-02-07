@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 19:52:34 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/07 08:00:15 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:14:08 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	create_transformation_matrix(vec4d *transformation, t_map map)
 	double	cosYaw;
 	double	sinYaw;
 
-	double offset_x = map.width * map.zoom / 2 - (map.zoom / 2);
-	double offset_z = map.height * map.zoom / 2 - (map.zoom / 2);
+	double offset_x = (map.width - 1) * map.zoom * 0.5;
+	double offset_z = (map.height - 1) * map.zoom * 0.5;
 
 	map.pitch *= (M_PI / 180.0);
 	map.yaw *= (M_PI / 180.0);
