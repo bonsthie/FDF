@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:12:20 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/07 12:58:19 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:40:52 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void apparition_animation(t_map *map)
 	if (yaw > 0.1)
 	{
 		pitch -= 0.015;
-		yaw -= 0.015;
+		yaw -= 0.010;
 	}
 }

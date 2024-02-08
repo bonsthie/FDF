@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:31:23 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/07 14:09:28 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/08 19:02:00 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	mousewheel(int key, void *param)
 
 	map = param;
 	if (key == 1)
+	{
 		map->zoom *= 1.07;
+		print_map(map, map->mlx);
+	}
 	// Zoom out
 	else if (key == 2)
 	{

@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:25 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/07 12:57:23 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/08 19:27:55 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "print.h"
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 double	calculate_zoom_size(int new_columns, int new_rows)
 {
@@ -90,6 +92,7 @@ int loop(void *content)
 		mlx_mouse_get_pos(mlx->connection, &x, &y);
 		printf("mouse [x == %d y == %d]\n", x, y);
 		mouse_translation(map);
+		return (0);
 	}
 	else if (map->mouse_rotation == true)
 	{
@@ -97,26 +100,14 @@ int loop(void *content)
 		mlx_mouse_get_pos(mlx->connection, &x, &y);
 		printf("mouse [x == %d y == %d]\n", x, y);
 		mouse_rotation(map);
-	}
+		return (0);
+	}	
 	return (0);
 }
 
 
-int	main(int ac, char **av)
+void init_map(t_map *map)
 {
-	t_map	*map;
-	t_data  mlx;
-
-	map = parsing_map(av[1]);
-	if (!map)
-		return (1);
-	for (int i = 0; i < map->width * map->height; i++)
-		printf("%d = %.1f \n", i, map->y[i]);
-	mlx.image = NULL;
-	mlx.connection = mlx_init();
-	mlx.window = mlx_new_window(mlx.connection, WIDTH, HEIGHT, "FDF");
-	mlx.image = NULL;
-	map->mlx = &mlx;
 	map->yaw = 359.3;
 	map->pitch = 253.4;
 	map->zoom_start = calculate_zoom_size(map->width, map->height);
@@ -129,16 +120,52 @@ int	main(int ac, char **av)
 	map->rotate = true;
 	map->mouse_rotation = false;
 	map->mouse_translation = false;
+}
+
+void hook(t_map *map)
+{
+	t_data mlx;
+
+	mlx = *map->mlx;
 	mlx_on_event(mlx.connection, mlx.window, MLX_WINDOW_EVENT, window_hook,mlx.connection);
 	mlx_on_event(mlx.connection, mlx.window, MLX_KEYDOWN, keyup_hook, map);
 	mlx_on_event(mlx.connection, mlx.window, MLX_MOUSEDOWN, mousedown_hook,map);
 	mlx_on_event(mlx.connection, mlx.window, MLX_MOUSEUP, mouseup_hook,map);
 	mlx_on_event(mlx.connection, mlx.window, MLX_MOUSEWHEEL, mousewheel, map);
+}
 
-	mlx_loop_hook(mlx.connection, loop, map);
-	mlx_loop(mlx.connection);
+void destroy(t_map *map)
+{
+	t_data mlx;
+
+	mlx = *map->mlx;
+	free(map->y);
+	free(map->color);
 	mlx_destroy_image(mlx.connection, mlx.image);
 	mlx_destroy_window(mlx.connection, mlx.window);
 	mlx_destroy_display(mlx.connection);
+}
+
+
+int	main(int ac, char **av)
+{
+	t_map	*map;
+	t_data	mlx;
+
+	map = parsing_map(av[1]);
+	if (!map)
+		return (1);
+	mlx.image = NULL;
+	mlx.connection = mlx_init();
+	mlx.window = mlx_new_window(mlx.connection, WIDTH, HEIGHT, "FDF");
+	mlx.image = NULL;
+	map->mlx = &mlx;
+	init_map(map);
+	for (int i = 0; i < map->width * map->height; i++)
+		printf("%d = %.1f \n", i, map->y[i]);
+	hook(map);
+	mlx_loop_hook(mlx.connection, loop, map);
+	mlx_loop(mlx.connection);
 	return (ac);
+	destroy(map);
 }
