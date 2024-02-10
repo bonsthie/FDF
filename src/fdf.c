@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:25 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/10 01:41:30 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:34:06 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,35 @@ double	calculate_zoom_size(int new_columns, int new_rows)
 	original_area = 19 * 12;
 	new_area = new_columns * new_rows;
 	area_ratio = original_area / new_area;
-	return (50.0 * sqrt(area_ratio));
+	return (100.0 * sqrt(area_ratio));
+}
+
+
+double find_biggest(double *y, int size_y)
+{
+	int i;
+	double	biggest;
+	
+	i = 0;
+	biggest = 1;
+	while(i < size_y)
+	{
+		if (y[i] > biggest)
+			biggest = y[i];
+		i++;
+	}
+	return (biggest);
 }
 
 void init_map(t_map *map)
 {
 	map->yaw = 359.3;
 	map->pitch = 253.4;
+	map->y_scale = 10.0 / find_biggest(map->y, map->height * map->width);
 	map->zoom_start = calculate_zoom_size(map->width, map->height);
 	map->zoom = map->zoom_start * 3;
-	map->offset_y = 300.0;
-	map->offset_x = 550.0;
+	map->offset_y = 550.0;
+	map->offset_x = 1000.0;
 	map->mouse_x = -1;
 	map->mouse_y = -1;
 	map->start = true;

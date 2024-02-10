@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 00:52:47 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/10 01:40:48 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:36:24 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-void	pop(void *value)
+void	pop_strs(void *value)
 {
 	free_strs(value);
 }
@@ -30,6 +30,8 @@ int	check_line_size(int line_size, char **strs)
 	new_size = 0;
 	while (strs[new_size])
 	{
+		if (*strs[new_size] == '\n')
+			break ;
 		if (!ft_strncmp(strs[new_size], "0x", 2) && !ft_isint(strs[new_size]))
 			return (-1);
 		new_size++;
@@ -38,6 +40,8 @@ int	check_line_size(int line_size, char **strs)
 		if (!ft_strncmp(strs[new_size], "0x", 2))
 			strs++;
 	}
+	// if (*strs[new_size] != '\n')
+	//		new_size++;
 	if (line_size == -1 || line_size == new_size)
 		return (new_size);
 	return (-1);
@@ -63,13 +67,38 @@ t_list	*get_map_from_file(int fd)
 		else
 		{
 			free_strs(split_line);
-			ft_lstclear(&head, pop);
+			ft_lstclear(&head, pop_strs);
 			return (NULL);
 		}
 		line = get_next_line(fd);
 	}
 	free(line);
 	return (head);
+}
+
+void	strs_to_point2(char **strs, double *y, int *color)
+{
+	if (!strs)
+		return ;
+	while (*strs)
+	{
+		*y = ft_atoi(*strs);
+		strs++;
+		if (!*strs)
+		{
+			*color = 0xFFFFFFFF;
+			break ;
+		}
+		if (!ft_strncmp(*strs, "0x", 2))
+		{
+			*color = strtol(*strs, NULL, 0) + 0xFF000000; // need to change that
+			strs++;
+		}
+		else
+			*color = 0xFFFFFFFF;
+		y++;
+		color++;
+	}
 }
 
 void	strs_to_point(char **strs, double *y, int *color)
@@ -80,15 +109,16 @@ void	strs_to_point(char **strs, double *y, int *color)
 	{
 		*y = ft_atoi(*strs);
 		strs++;
-		if (!*strs)
-			break ;
-		if (!ft_strncmp(*strs, "0x", 2))
-		{
-			*color = strtol(*strs, NULL, 0); // need to change that
+		if (*strs && !ft_strncmp(*strs, "0x", 2))
 			strs++;
-		}
+		if (*y <= 0)
+			*color = 0xFF001db0;
+		else if (*y <= 200)
+			*color = 0xFF014503;
+		else if (*y >= 450)
+			*color = 0xFFbfbebd;
 		else
-			*color = 0xFFFFFFFF;
+			*color = 0xFF361d01;
 		y++;
 		color++;
 	}
@@ -117,7 +147,7 @@ int	fill_map_point(t_map *map, t_list *head)
 	return (0);
 }
 
-t_map	*fill_map2(t_list *head)
+t_map	*fill_map(t_list *head)
 {
 	t_map	*map;
 
@@ -140,14 +170,13 @@ t_map	*parsing_map(char *file)
 	t_list	*head;
 	int		fd;
 
-	// mangage letter in the file
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
 	head = get_map_from_file(fd);
 	if (!head)
 		return (NULL);
-	map = fill_map2(head);
-	ft_lstclear(&head, pop);
+	map = fill_map(head);
+	ft_lstclear(&head, pop_strs);
 	return (map);
 }

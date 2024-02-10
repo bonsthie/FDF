@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:31:23 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/09 22:54:36 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:19:56 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	mousedown_hook(int key, void *param)
 	t_map	*map;
 
 	map = param;
+	map->rotate = false;
+	map->start = false;
 	if (key == 1)
 	{
 		map->mouse_translation = true;
@@ -59,6 +61,8 @@ int	mousewheel_hook(int key, void *param)
 	t_map	*map;
 
 	map = param;
+	map->rotate = false;
+	map->start = false;
 	if (key == 1)
 	{
 		map->zoom *= 1.07;

@@ -6,13 +6,13 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:38:38 by babonnet          #+#    #+#             */
-/*   Updated: 2024/01/29 11:39:54 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:12:59 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-__attribute__((always_inline)) void matrix_multiplication1x4(vec4d *matrix,
+__attribute__((always_inline)) void	matrix_multiplication1x4(vec4d *matrix,
 	vec4d vector, vec4d *result)
 {
 	int		i;

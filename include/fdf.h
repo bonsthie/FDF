@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:38 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/07 13:39:11 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:31:45 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include <unistd.h>
 
 #ifndef WIDTH
-# define WIDTH 1080
+# define WIDTH 1920
 #endif
 
 #ifndef HEIGHT
-# define HEIGHT 1080 * 9 / 16
+# define HEIGHT 1080
 #endif
 
 typedef double vec4d __attribute__((vector_size(4 * sizeof(double))));
@@ -37,6 +37,7 @@ typedef struct s_map
 {
 	t_data  *mlx;
 	double	*y;
+	double  y_scale;
 	int		*color;
 	int		width;
 	int		height;
