@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:25 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/01/29 11:37:39 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/10 01:41:30 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void destroy(t_map *map)
 	mlx = *map->mlx;
 	free(map->y);
 	free(map->color);
+	free(map);
 	mlx_destroy_image(mlx.connection, mlx.image);
 	mlx_destroy_window(mlx.connection, mlx.window);
 	mlx_destroy_display(mlx.connection);

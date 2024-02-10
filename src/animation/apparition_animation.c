@@ -6,11 +6,12 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:12:20 by babonnet          #+#    #+#             */
-/*   Updated: 2024/01/29 11:39:24 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/10 00:29:56 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
+#include <math.h>
 
 void	apparition_animation(t_map *map)
 {

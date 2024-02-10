@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:31:23 by babonnet          #+#    #+#             */
-/*   Updated: 2024/01/29 11:35:14 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/09 22:54:36 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	mouse_translation(t_map *map)
 		map->mouse_y = y;
 	}
 	mlx_mouse_get_pos(mlx->connection, &map->mouse_x, &map->mouse_y);
-	refresh_screen(map->mlx);
+	mlx_clear_window(mlx->connection, mlx->window);
 	print_map(map, map->mlx);
 }
 
@@ -112,6 +112,6 @@ void	mouse_rotation(t_map *map)
 		map->mouse_y = y;
 	}
 	mlx_mouse_get_pos(mlx->connection, &map->mouse_x, &map->mouse_y);
-	refresh_screen(map->mlx);
+	mlx_clear_window(mlx->connection, mlx->window);
 	print_map(map, map->mlx);
 }

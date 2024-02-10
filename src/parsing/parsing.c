@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 00:52:47 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/01/29 11:40:10 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/10 01:40:48 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_list	*get_map_from_file(int fd)
 	while (line)
 	{
 		split_line = ft_split(line, ' ');
+		free(line);
 		line_size = check_line_size(line_size, split_line);
 		if (line_size != -1)
 			ft_lstadd_back(&head, ft_lstnew(split_line));
@@ -67,6 +68,7 @@ t_list	*get_map_from_file(int fd)
 		}
 		line = get_next_line(fd);
 	}
+	free(line);
 	return (head);
 }
 

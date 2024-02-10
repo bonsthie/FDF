@@ -6,48 +6,56 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 19:52:34 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/07 14:14:08 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/10 01:14:56 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <math.h>
 
-void	create_transformation_matrix(vec4d *transformation, t_map map)
+typedef struct s_position
 {
-	vec4d	*m_pitch;
-	vec4d	*m_yaw;
-	vec4d	*m_scale;
-	vec4d	tempMatrix[4];
+	vec4d	*pitch;
+	vec4d	*yaw;
+	vec4d	*scale;
+} t_position;
+
+typedef struct s_rotation_metrics
+{
 	double	cosPitch;
 	double	sinPitch;
 	double	cosYaw;
 	double	sinYaw;
+} t_rotation_metrics;
 
-	double offset_x = (map.width - 1) * map.zoom * 0.5;
-	double offset_z = (map.height - 1) * map.zoom * 0.5;
+
+void	create_transformation_matrix(vec4d *transformation, t_map map)
+{
+	t_position matrix;
+	t_rotation_metrics metrics;
+	vec4d	tempMatrix[4];
 
 	map.pitch *= (M_PI / 180.0);
 	map.yaw *= (M_PI / 180.0);
-	cosPitch = cos(map.pitch);
-	sinPitch = sin(map.pitch);
-	cosYaw = cos(map.yaw);
-	sinYaw = sin(map.yaw);
-	m_pitch = (vec4d[4]){
+	metrics.cosPitch = cos(map.pitch);
+	metrics.sinPitch = sin(map.pitch);
+	metrics.cosYaw = cos(map.yaw);
+	metrics.sinYaw = sin(map.yaw);
+	matrix.pitch = (vec4d[4]){
 	{1, 0, 0, 0},
-	{0, cosPitch, -sinPitch, 0},
-	{0, sinPitch, cosPitch, 0},
+	{0, metrics.cosPitch, -metrics.sinPitch, 0},
+	{0, metrics.sinPitch, metrics.cosPitch, 0},
 	{0, 0, 0, 1}};
-	m_yaw = (vec4d[4]){
-	{cosYaw, 0, sinYaw, 0},
+	matrix.yaw = (vec4d[4]){
+	{metrics.cosYaw, 0, metrics.sinYaw, 0},
 	{0, 1, 0, 0},
-	{-sinYaw, 0, cosYaw, 0},
+	{-metrics.sinYaw, 0, metrics.cosYaw, 0},
 	{0, 0, 0, 1}};
-	m_scale = (vec4d[4]){
-	{map.zoom, 0, 0, -offset_x},
+	matrix.scale = (vec4d[4]){
+	{map.zoom, 0, 0, -((map.width - 1) * map.zoom * 0.5)},
     {0, map.zoom, 0, -map.zoom},
-    {0, 0, map.zoom, -offset_z},
+    {0, 0, map.zoom, -((map.height - 1) * map.zoom * 0.5)},
     {0, 0, 0, 1}};
-	matrix_multiplication4x4(tempMatrix, m_pitch, m_yaw);
-	matrix_multiplication4x4(transformation, tempMatrix, m_scale);
+	matrix_multiplication4x4(tempMatrix, matrix.pitch, matrix.yaw);
+	matrix_multiplication4x4(transformation, tempMatrix, matrix.scale);
 }
