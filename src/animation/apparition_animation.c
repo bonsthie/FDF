@@ -6,30 +6,31 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 10:12:20 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/10 00:29:56 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:18:04 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
-#include <math.h>
 
 void	apparition_animation(t_map *map)
 {
-	static float	yaw = 0.8;
-	static float	pitch = 1.5;
+	static double	yaw = 0.8;
+	static double	pitch = 1.5;
+	t_position		*pos;
 	t_data			*mlx;
 
 	mlx = map->mlx;
+	pos = map->pos;
 	print_map(map, mlx);
-	if (map->pitch > 210.0)
-		map->pitch -= pitch;
-	if (map->yaw > 322.0)
-		map->yaw -= yaw;
-	if (map->zoom > map->zoom_start)
-		map->zoom -= map->zoom_start * 0.05;
-	if (map->pitch <= 210.0 && map->yaw <= 322.0
-		&& map->zoom <= map->zoom_start)
-		map->start = false;
+	if (pos->pitch > 210.0)
+		pos->pitch -= pitch;
+	if (pos->yaw > 322.0)
+		pos->yaw -= yaw;
+	if (pos->zoom > pos->zoom_start)
+		pos->zoom -= pos->zoom_start * 0.05;
+	if (pos->pitch <= 210.0 && pos->yaw <= 322.0
+		&& pos->zoom <= pos->zoom_start)
+		map->anim->start = false;
 	if (yaw > 0.1)
 	{
 		pitch -= 0.015;

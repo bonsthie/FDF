@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 00:52:47 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/10 21:36:24 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:48:50 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ int	check_line_size(int line_size, char **strs)
 		if (!ft_strncmp(strs[new_size], "0x", 2))
 			strs++;
 	}
-	// if (*strs[new_size] != '\n')
-	//		new_size++;
 	if (line_size == -1 || line_size == new_size)
 		return (new_size);
 	return (-1);
@@ -76,7 +74,7 @@ t_list	*get_map_from_file(int fd)
 	return (head);
 }
 
-void	strs_to_point2(char **strs, double *y, int *color)
+void	strs_to_point(char **strs, double *y, unsigned int *color)
 {
 	if (!strs)
 		return ;
@@ -91,34 +89,11 @@ void	strs_to_point2(char **strs, double *y, int *color)
 		}
 		if (!ft_strncmp(*strs, "0x", 2))
 		{
-			*color = strtol(*strs, NULL, 0) + 0xFF000000; // need to change that
+			*color = ft_strtol(*strs, NULL, 0) + 0xFF000000;
 			strs++;
 		}
 		else
 			*color = 0xFFFFFFFF;
-		y++;
-		color++;
-	}
-}
-
-void	strs_to_point(char **strs, double *y, int *color)
-{
-	if (!strs)
-		return ;
-	while (*strs)
-	{
-		*y = ft_atoi(*strs);
-		strs++;
-		if (*strs && !ft_strncmp(*strs, "0x", 2))
-			strs++;
-		if (*y <= 0)
-			*color = 0xFF001db0;
-		else if (*y <= 200)
-			*color = 0xFF014503;
-		else if (*y >= 450)
-			*color = 0xFFbfbebd;
-		else
-			*color = 0xFF361d01;
 		y++;
 		color++;
 	}
@@ -131,16 +106,17 @@ int	fill_map_point(t_map *map, t_list *head)
 	map->y = malloc(map->height * map->width * sizeof(double));
 	if (!map->y)
 		return (1);
-	map->color = malloc(map->height * map->width * sizeof(int));
+	map->standard_color = malloc(map->height * map->width * sizeof(int));
 	position = 0;
-	if (!map->color)
+	if (!map->standard_color)
 	{
 		free(map->y);
 		return (1);
 	}
 	while (head)
 	{
-		strs_to_point(head->content, &map->y[position], &map->color[position]);
+		strs_to_point(head->content, &map->y[position],
+			&map->standard_color[position]);
 		position += map->width;
 		head = head->next;
 	}

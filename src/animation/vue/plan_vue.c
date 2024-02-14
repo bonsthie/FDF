@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   limit.h                                            :+:      :+:    :+:   */
+/*   plan_vue.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/06 02:46:02 by bbonnet           #+#    #+#             */
-/*   Updated: 2023/12/06 16:46:48 by babonnet         ###   ########.fr       */
+/*   Created: 2024/02/11 23:01:56 by babonnet          #+#    #+#             */
+/*   Updated: 2024/02/13 11:36:17 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIMIT_H
-# define LIMIT_H
+#include "fdf.h"
 
-# ifndef INT_MIN
-#  define INT_MIN -2147483648;
-# endif
+t_position	*plan_vue(void)
+{
+	static t_position	plan = {.yaw = 0, .pitch = 270};
 
-# ifndef INT_MAX
-#  define INT_MAX 2147483647;
-# endif
-
-#endif
+	return (&plan);
+}

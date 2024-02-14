@@ -6,15 +6,37 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 20:59:09 by babonnet          #+#    #+#             */
-/*   Updated: 2024/01/29 11:32:31 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:08:29 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HOOK_H
 # define HOOK_H
 
-void hook(t_map *map);
-int loop(void *content);
+# include "fdf.h"
+
+enum	e_keycode
+{
+	A_KEY = 4,
+	C_KEY = 6,
+	D_KEY = 7,
+	L_KEY = 15,
+	O_KEY = 18,
+	S_KEY = 22,
+	W_KEY = 26,
+	N1_KEY = 30,
+	N2_KEY = 31,
+	N9_KEY = 38,
+	N0_KEY = 39,
+	ESCAPE = 41,
+	L_ARROW = 79,
+	R_ARROW = 80,
+	UP_ARROW = 81,
+	DOWN_ARROW = 82,
+};
+
+void	hook(t_map *map);
+int		loop(void *content);
 
 int		window_hook(int event, void *param);
 int		keyup_hook(int key, void *param);
