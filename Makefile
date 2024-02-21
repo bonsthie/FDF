@@ -64,7 +64,8 @@ LIBMLX_INCLUDE = includes
 LIB = $(foreach lib,$(LIBRARIES),-L$($(lib)_DIR) $($(lib)_FLAG))
 LIB_DIR = $(foreach lib,$(LIBRARIES),-I $($(lib)_DIR)/$($(lib)_INCLUDE))
 
-LIBS_BINARYS = $(LIBFT_BINARY) $(LIBMLX_BINARY)
+LIBS_BINARYS += $(foreach lib,$(LIBRARIES), $($(lib)_BINARY))
+
 # Additional linker flags
 ADDITIONAL_FLAGS = -lm
 
