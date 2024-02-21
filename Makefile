@@ -63,7 +63,6 @@ LIBMLX_INCLUDE = includes
 
 LIB = $(foreach lib,$(LIBRARIES),-L$($(lib)_DIR) $($(lib)_FLAG))
 LIB_DIR = $(foreach lib,$(LIBRARIES),-I $($(lib)_DIR)/$($(lib)_INCLUDE))
-
 LIBS_BINARYS += $(foreach lib,$(LIBRARIES), $($(lib)_BINARY))
 
 # Additional linker flags
@@ -72,7 +71,7 @@ ADDITIONAL_FLAGS = -lm
 ################################ MAKEFILE RULES #####################################
 all: $(NAME)
 
-$(NAME): $(LIBFT_BINARY) $(LIBMLX_BINARY) $(OBJ)
+$(NAME): $(LIBS_BINARYS) $(OBJ)
 	@echo "$(GREEN)Linking $(NAME)...$(NC)"
 	@$(CC) $(CFLAGS) $(OBJ) -o $@ $(LIB) $(ADDITIONAL_FLAGS)
 
