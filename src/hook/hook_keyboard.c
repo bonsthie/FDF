@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 21:00:22 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/13 17:14:00 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/17 20:21:19 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,17 @@ static void	animation(int key, t_animation *anim)
 		anim->rotate = !anim->rotate;
 }
 
+static void view(int key, t_animation *anim)
+{
+	if (key == N1_KEY)
+		anim->translation = isometric_view();
+	else if (key == N2_KEY)
+		anim->translation = plan_view();
+	else if (key == N2_KEY + 1)
+		anim->translation = side_view();
+
+}
+
 int	keyup_hook(int key, void *param)
 {
 	t_map	*map;
@@ -63,10 +74,8 @@ int	keyup_hook(int key, void *param)
 		map->y_scale += 0.01;
 	else if (key == L_KEY)
 		map->y_scale -= 0.01;
-	else if (key == N1_KEY)
-		map->anim->translation = isometric_vue();
-	else if (key == N2_KEY)
-		map->anim->translation = plan_vue();
+	else if (key >= N1_KEY && key <= N5_KEY)
+		view(key, map->anim);
 	else if (key == N0_KEY)
 		montain_color(map);
 	else if (key == N9_KEY)

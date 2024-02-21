@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plan_vue.c                                         :+:      :+:    :+:   */
+/*   side_view.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/11 23:01:56 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/13 11:36:17 by babonnet         ###   ########.fr       */
+/*   Created: 2024/02/17 19:41:34 by babonnet          #+#    #+#             */
+/*   Updated: 2024/02/17 19:44:10 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_position	*plan_vue(void)
+t_position *side_view(void)
 {
-	static t_position	plan = {.yaw = 0, .pitch = 270};
+	static t_position pos = {.yaw = 90, .pitch = 180};
 
-	return (&plan);
+	return (&pos);
 }

@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 00:52:47 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/14 15:48:50 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/17 18:19:05 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,6 @@
 void	pop_strs(void *value)
 {
 	free_strs(value);
-}
-
-int	check_line_size(int line_size, char **strs)
-{
-	int	new_size;
-
-	if (!strs)
-		return (-1);
-	new_size = 0;
-	while (strs[new_size])
-	{
-		if (*strs[new_size] == '\n')
-			break ;
-		if (!ft_strncmp(strs[new_size], "0x", 2) && !ft_isint(strs[new_size]))
-			return (-1);
-		new_size++;
-		if (!strs[new_size])
-			break ;
-		if (!ft_strncmp(strs[new_size], "0x", 2))
-			strs++;
-	}
-	if (line_size == -1 || line_size == new_size)
-		return (new_size);
-	return (-1);
 }
 
 t_list	*get_map_from_file(int fd)
@@ -74,78 +50,14 @@ t_list	*get_map_from_file(int fd)
 	return (head);
 }
 
-void	strs_to_point(char **strs, double *y, unsigned int *color)
-{
-	if (!strs)
-		return ;
-	while (*strs)
-	{
-		*y = ft_atoi(*strs);
-		strs++;
-		if (!*strs)
-		{
-			*color = 0xFFFFFFFF;
-			break ;
-		}
-		if (!ft_strncmp(*strs, "0x", 2))
-		{
-			*color = ft_strtol(*strs, NULL, 0) + 0xFF000000;
-			strs++;
-		}
-		else
-			*color = 0xFFFFFFFF;
-		y++;
-		color++;
-	}
-}
-
-int	fill_map_point(t_map *map, t_list *head)
-{
-	int	position;
-
-	map->y = malloc(map->height * map->width * sizeof(double));
-	if (!map->y)
-		return (1);
-	map->standard_color = malloc(map->height * map->width * sizeof(int));
-	position = 0;
-	if (!map->standard_color)
-	{
-		free(map->y);
-		return (1);
-	}
-	while (head)
-	{
-		strs_to_point(head->content, &map->y[position],
-			&map->standard_color[position]);
-		position += map->width;
-		head = head->next;
-	}
-	return (0);
-}
-
-t_map	*fill_map(t_list *head)
-{
-	t_map	*map;
-
-	map = malloc(sizeof(t_map));
-	if (!map)
-		return (NULL);
-	map->height = ft_lstsize(head);
-	map->width = check_line_size(-1, head->content);
-	if (fill_map_point(map, head))
-	{
-		free(map);
-		return (NULL);
-	}
-	return (map);
-}
-
 t_map	*parsing_map(char *file)
 {
 	t_map	*map;
 	t_list	*head;
 	int		fd;
 
+	if (ft_strcmp(&file[ft_strlen(file) - 4], ".fdf"))
+		return (NULL);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:29:14 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/14 15:53:35 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/17 20:22:36 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void	stay_in_360(t_position *pos)
 	if (pos->yaw > 360)
 		pos->yaw -= 360;
 	if (pos->pitch < 0)
-		pos->pitch += 360;
-	if (pos->yaw > 0)
-		pos->yaw += 360;
+		pos->pitch = 360 + pos->pitch;
+	if (pos->yaw < 0)
+		pos->yaw = 360 + pos->yaw;
 }
 
 int	loop(void *content)
@@ -41,7 +41,7 @@ int	loop(void *content)
 		mouse_translation(map);
 	else if (anim->mouse_rotation == true)
 		mouse_rotation(map);
-	else if (anim->translation)
+	if (anim->translation)
 		transition(map, *anim->translation);
 	stay_in_360(map->pos);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 20:59:09 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/13 11:08:29 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/17 19:52:22 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ enum	e_keycode
 	W_KEY = 26,
 	N1_KEY = 30,
 	N2_KEY = 31,
+	N3_KEY = 32,
+	N4_KEY = 33,
+	N5_KEY = 34,
 	N9_KEY = 38,
 	N0_KEY = 39,
 	ESCAPE = 41,

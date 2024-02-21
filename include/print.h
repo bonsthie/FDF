@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:46:27 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/13 22:20:25 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/17 18:12:25 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_line_parm
 void	plot_line(t_data *mlx, int *v1, int *v2, int color);
 void	plot_line_high(t_data mlx, int *v1, int *v2, int color);
 void	plot_line_low(t_data mlx, int *v1, int *v2, int color);
+void	print_map_screen(t_data *mlx, t_map *map, int *coord);
 void	print_map(t_map *map, t_data *data);
 
 #endif

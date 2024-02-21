@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transition.c                                       :+:      :+:    :+:   */
+/*   isometric_view.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/11 21:42:INCREMENT2 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/17 20:19:48 by babonnet         ###   ########.fr       */
+/*   Created: 2024/02/11 21:37:14 by babonnet          #+#    #+#             */
+/*   Updated: 2024/02/17 20:16:27 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "print.h"
 
-void	transition(t_map *map, t_position target)
+t_position	*isometric_view(void)
 {
-	t_animation *anim;
+	static t_position	vue = {.pitch = 210, .yaw = 322};
 
-	anim = map->anim;
-	map->pos->yaw = target.yaw;
-	map->pos->pitch = target.pitch;
-	anim->translation = NULL;
-	anim->start = false;
-	anim->rotate = false;
-	print_map(map, map->mlx);
+	return (&vue);
 }
