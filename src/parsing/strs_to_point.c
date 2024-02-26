@@ -6,7 +6,7 @@
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:18:14 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/17 18:18:26 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/22 00:07:25 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	strs_to_point(char **strs, double *y, unsigned int *color)
 		return ;
 	while (*strs)
 	{
+		if (**strs == '\n')
+			break ;
 		*y = ft_atoi(*strs);
 		strs++;
 		if (!*strs)

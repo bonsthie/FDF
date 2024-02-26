@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook.h                                             :+:      :+:    :+:   */
+/*   hook_bonus.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 20:59:09 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/21 21:12:21 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:18:28 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HOOK_H
-# define HOOK_H
+#ifndef HOOK_BONUS_H
+# define HOOK_BONUS_H
 
-# include "fdf.h"
+# include "mlx.h"
 
 enum	e_keycode
 {

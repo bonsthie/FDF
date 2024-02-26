@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   print_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:46:27 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/21 21:12:21 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:18:51 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#ifndef PRINT_BONUS_H
+# define PRINT_BONUS_H
 
-# include "fdf.h"
+# include "fdf_bonus.h"
 
 typedef struct s_line_parm
 {

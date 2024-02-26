@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   fdf_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 22:04:25 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/26 14:06:25 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:15:42 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include "hook.h"
+#include "fdf_bonus.h"
+#include "hook_bonus.h"
 #include "mlx.h"
-#include "init_map.h"
-#include "parsing.h"
+#include "init_map_bonus.h"
+#include "parsing_bonus.h"
 #include <stdlib.h>
 
 void	destroy(t_map *map)

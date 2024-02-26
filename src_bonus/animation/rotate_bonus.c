@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   rotate_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/06 02:01:55 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/21 21:12:21 by babonnet         ###   ########.fr       */
+/*   Created: 2024/02/07 10:48:44 by babonnet          #+#    #+#             */
+/*   Updated: 2024/02/26 10:52:47 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "fdf_bonus.h"
+#include "print_bonus.h"
 
-# include "fdf.h"
-# include "libft.h"
+void	rotate(t_map *map)
+{
+	t_data	*mlx;
 
-int		is_valid_map(int fd);
-t_map	*parsing_map(char *file);
-t_map	*create_map(int fd, int size);
-int		check_line_size(int line_size, char **strs);
-t_map	*fill_map(t_list *head);
-void	strs_to_point(char **strs, double *y, unsigned int *color);
-
-#endif
+	mlx = map->mlx;
+	map->pos->yaw -= 0.1;
+	print_map(map, mlx);
+}

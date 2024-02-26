@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   maths.h                                            :+:      :+:    :+:   */
+/*   maths_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 10:59:45 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/21 21:12:21 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:18:28 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATHS_H
-# define MATHS_H
+#ifndef MATHS_BONUS_H
+# define MATHS_BONUS_H
 
-# include "fdf.h"
+# include "fdf_bonus.h"
 # include <math.h>
 
 typedef struct s_position_matrix

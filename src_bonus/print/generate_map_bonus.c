@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   generate_map.c                                     :+:      :+:    :+:   */
+/*   generate_map_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 17:48:42 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/22 01:49:30 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:12:34 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 #include "mlx.h"
-#include "maths.h"
-#include "print.h"
+#include "maths_bonus.h"
+#include "print_bonus.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

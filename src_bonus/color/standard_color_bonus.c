@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   standard_color_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/06 02:01:55 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/21 21:12:21 by babonnet         ###   ########.fr       */
+/*   Created: 2024/02/12 00:06:35 by babonnet          #+#    #+#             */
+/*   Updated: 2024/02/26 11:12:59 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "fdf_bonus.h"
+#include "libft.h"
 
-# include "fdf.h"
-# include "libft.h"
-
-int		is_valid_map(int fd);
-t_map	*parsing_map(char *file);
-t_map	*create_map(int fd, int size);
-int		check_line_size(int line_size, char **strs);
-t_map	*fill_map(t_list *head);
-void	strs_to_point(char **strs, double *y, unsigned int *color);
-
-#endif
+void	standard_color(t_map *map)
+{
+	ft_memcpy(map->color,
+		map->standard_color,
+		map->height * map->width * sizeof(int));
+}

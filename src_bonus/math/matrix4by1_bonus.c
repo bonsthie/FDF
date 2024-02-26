@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   matrix4by1_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/06 02:01:55 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/21 21:12:21 by babonnet         ###   ########.fr       */
+/*   Created: 2024/02/07 13:38:38 by babonnet          #+#    #+#             */
+/*   Updated: 2024/02/26 10:52:48 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "fdf_bonus.h"
 
-# include "fdf.h"
-# include "libft.h"
+__attribute__((always_inline)) void	matrix_multiplication1x4(t_vec4d *matrix,
+												t_vec4d vector, t_vec4d *result)
+{
+	int		i;
+	t_vec4d	product;
+	double	dot_product;
 
-int		is_valid_map(int fd);
-t_map	*parsing_map(char *file);
-t_map	*create_map(int fd, int size);
-int		check_line_size(int line_size, char **strs);
-t_map	*fill_map(t_list *head);
-void	strs_to_point(char **strs, double *y, unsigned int *color);
-
-#endif
+	*result = (t_vec4d){0, 0, 0, 0};
+	i = 0;
+	while (i < 4)
+	{
+		product = matrix[i] * vector;
+		dot_product = product[0] + product[1] + product[2] + product[3];
+		(*result)[i] = dot_product;
+		i++;
+	}
+}

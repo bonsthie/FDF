@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_map.c                                         :+:      :+:    :+:   */
+/*   init_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 18:23:08 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/21 21:14:17 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:52:48 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "animation.h"
-#include "fdf.h"
-#include "init_map.h"
+#include "animation_bonus.h"
+#include "fdf_bonus.h"
+#include "init_map_bonus.h"
 #include <stdlib.h>
 
 t_position	*init_pos(t_map *map)

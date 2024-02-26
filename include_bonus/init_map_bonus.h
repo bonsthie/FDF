@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   init_map_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/06 02:01:55 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/21 21:12:21 by babonnet         ###   ########.fr       */
+/*   Created: 2024/02/17 18:31:00 by babonnet          #+#    #+#             */
+/*   Updated: 2024/02/26 16:18:28 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef INIT_MAP_BONUS_H
+# define INIT_MAP_BONUS_H
 
-# include "fdf.h"
-# include "libft.h"
+# include "fdf_bonus.h"
 
-int		is_valid_map(int fd);
-t_map	*parsing_map(char *file);
-t_map	*create_map(int fd, int size);
-int		check_line_size(int line_size, char **strs);
-t_map	*fill_map(t_list *head);
-void	strs_to_point(char **strs, double *y, unsigned int *color);
+double	calculate_zoom_size(int new_columns, int new_rows);
+double	find_biggest(double *y, int size_y);
+
+int		init_map(t_map *map);
 
 #endif

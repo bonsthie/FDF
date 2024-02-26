@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/11 21:42:INCREMENT2 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/17 20:19:48 by babonnet         ###   ########.fr       */
+/*   Created: 2024/02/11 21:42:INCREMENT2 by babonnet          #+#    #+#     */
+/*   Updated: 2024/02/21 21:13:37 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	transition(t_map *map, t_position target)
 {
-	t_animation *anim;
+	t_animation	*anim;
 
 	anim = map->anim;
 	map->pos->yaw = target.yaw;

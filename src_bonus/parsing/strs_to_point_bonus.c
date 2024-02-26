@@ -1,20 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isometric_view.c                                   :+:      :+:    :+:   */
+/*   strs_to_point_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/11 21:37:14 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/21 21:11:04 by babonnet         ###   ########.fr       */
+/*   Created: 2024/02/17 18:18:14 by babonnet          #+#    #+#             */
+/*   Updated: 2024/02/26 11:12:59 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-t_position	*isometric_view(void)
+void	strs_to_point(char **strs, double *y, unsigned int *color)
 {
-	static t_position	vue = {.pitch = 210, .yaw = 322};
-
-	return (&vue);
+	if (!strs)
+		return ;
+	while (*strs)
+	{
+		if (**strs == '\n')
+			break ;
+		*y = ft_atoi(*strs);
+		strs++;
+		if (!*strs)
+		{
+			*color = 0xFFFFFFFF;
+			break ;
+		}
+		if (!ft_strncmp(*strs, "0x", 2))
+		{
+			*color = ft_strtol(*strs, NULL, 0) + 0xFF000000;
+			strs++;
+		}
+		else
+			*color = 0xFFFFFFFF;
+		y++;
+		color++;
+	}
 }

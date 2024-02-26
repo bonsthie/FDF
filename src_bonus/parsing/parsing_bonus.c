@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 00:52:47 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/26 16:37:30 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:15:45 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 #include "libft.h"
-#include "parsing.h"
+#include "parsing_bonus.h"
 #include <fcntl.h>
 #include <stdio.h>
 

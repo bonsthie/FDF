@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook_keyboard.c                                    :+:      :+:    :+:   */
+/*   hook_keyboard_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 21:00:22 by babonnet          #+#    #+#             */
-/*   Updated: 2024/02/21 21:12:47 by babonnet         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:12:34 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "animation.h"
-#include "fdf.h"
-#include "hook.h"
+#include "animation_bonus.h"
+#include "fdf_bonus.h"
+#include "hook_bonus.h"
 #include "mlx.h"
-#include "print.h"
+#include "print_bonus.h"
 
 static void	offset_input(int key, t_position *pos)
 {

@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   matrix4by4_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: babonnet <babonnet@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/06 02:01:55 by bbonnet           #+#    #+#             */
-/*   Updated: 2024/02/21 21:12:21 by babonnet         ###   ########.fr       */
+/*   Created: 2024/02/05 20:31:44 by babonnet          #+#    #+#             */
+/*   Updated: 2024/02/26 10:52:48 by babonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "fdf_bonus.h"
 
-# include "fdf.h"
-# include "libft.h"
+void	matrix_multiplication4x4(t_vec4d result[4], t_vec4d a[4], t_vec4d b[4])
+{
+	int		i;
+	int		j;
+	t_vec4d	temp;
+	t_vec4d	replicated;
 
-int		is_valid_map(int fd);
-t_map	*parsing_map(char *file);
-t_map	*create_map(int fd, int size);
-int		check_line_size(int line_size, char **strs);
-t_map	*fill_map(t_list *head);
-void	strs_to_point(char **strs, double *y, unsigned int *color);
-
-#endif
+	i = 0;
+	while (i < 4)
+	{
+		temp = (t_vec4d){0, 0, 0, 0};
+		j = 0;
+		while (j < 4)
+		{
+			replicated = (t_vec4d){a[i][j], a[i][j], a[i][j], a[i][j]};
+			temp += replicated * b[j];
+			j++;
+		}
+		result[i] = temp;
+		i++;
+	}
+}
